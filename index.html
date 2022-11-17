@@ -13,7 +13,7 @@
             let computerChoice = choiceArray[Math.floor(Math.random()*choiceArray.length)];
             return computerChoice;
         }
-        
+                       
         function playRound(playerSelection, computerSelection) {
                        
             if (playerSelection.toLowerCase() === computerSelection) {
@@ -36,10 +36,43 @@
             }
         }
         
-        const playerSelection = 'rOck';
-        const computerSelection = getComputerChoice();
-        console.log(playRound(playerSelection, computerSelection));
+        const playerSelection = 'pApeR';
+        let computerSelection = getComputerChoice();
+                
+        const scoreBoard = new Array();
 
+        function game() {
+            for (let i = 0; i < 5; i++) {
+                scoreBoard.push(playRound(playerSelection, getComputerChoice()));
+            }
+            return scoreBoard;  
+        }
+
+        function scoreTotal() {
+            let score = 0;
+            for (let n = 0; n < 5; n++) {
+                if (scoreBoard[n].includes('Winner') == true) {
+                    score++;
+                } else if (scoreBoard[n].includes('lose') == true) {
+                    score--;
+                } else {
+                    score + 0;
+                }
+            }
+
+            if (score > 0) {
+                return finalResult = 'Congratulations! You won a free iPod Nano!';
+            } else if (score < 0) {
+                return finalResult = 'You just lost the game!';
+            } else {
+                return finalResult = 'Sawadi-ka! It was a tie!'
+            }
+        }
+        
+        
+        console.log(game());
+        console.log(scoreTotal());
+        
 
 
 
