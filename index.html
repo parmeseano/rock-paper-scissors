@@ -35,17 +35,16 @@
                 return result = 'Oopsies, something went wrong';
             }
         }
-        
-        const playerSelection = 'pApeR';
-        let computerSelection = getComputerChoice();
                 
         const scoreBoard = new Array();
 
         function game() {
             for (let i = 0; i < 5; i++) {
+                let playerSelection = prompt('Rock, Paper, or Scissors?');
                 scoreBoard.push(playRound(playerSelection, getComputerChoice()));
-            }
-            return scoreBoard;  
+                console.log(scoreBoard[i]);
+            }  
+            return scoreTotal();
         }
 
         function scoreTotal() {
@@ -69,15 +68,7 @@
             }
         }
         
-        
-        console.log(game());
-        console.log(scoreTotal());
-        
-
-
-
-        
-
+        console.log(game());        
     </script>
 </body>
 </html>
