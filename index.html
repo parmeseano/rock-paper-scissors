@@ -7,7 +7,22 @@
     <title>Rock Paper Scissors</title>
 </head>
 <body>
+
+    <button class="button" id="rock">Rock</button>
+    <button class ="button" id="paper">Paper</button>
+    <button class="button" id="scissors">Scissors</button>
+
     <script>
+
+        const rock = document.getElementById('rock').addEventListener('click', buttonClick);
+        const paper = document.getElementById('paper').addEventListener('click', buttonClick);
+        const scissors = document.getElementById('scissors').addEventListener('click', buttonClick);
+
+        function buttonClick() {
+            playerSelection = this.id;
+            console.log(playRound(playerSelection, getComputerChoice()));
+        }
+
         function getComputerChoice() {
             const choiceArray = ['rock', 'paper', 'scissors'];
             let computerChoice = choiceArray[Math.floor(Math.random()*choiceArray.length)];
@@ -35,40 +50,42 @@
                 return result = 'Oopsies, something went wrong';
             }
         }
-                
-        const scoreBoard = new Array();
 
-        function game() {
-            for (let i = 0; i < 5; i++) {
-                let playerSelection = prompt('Rock, Paper, or Scissors?');
-                scoreBoard.push(playRound(playerSelection, getComputerChoice()));
-                console.log(scoreBoard[i]);
-            }  
-            return scoreTotal();
-        }
-
-        function scoreTotal() {
-            let score = 0;
-            for (let n = 0; n < 5; n++) {
-                if (scoreBoard[n].includes('Winner') == true) {
-                    score++;
-                } else if (scoreBoard[n].includes('lose') == true) {
-                    score--;
-                } else {
-                    score + 0;
-                }
-            }
-
-            if (score > 0) {
-                return finalResult = 'Congratulations! You won a free iPod Nano!';
-            } else if (score < 0) {
-                return finalResult = 'You just lost the game!';
-            } else {
-                return finalResult = 'Sawadi-ka! It was a tie!'
-            }
-        }
         
-        console.log(game());        
+
+        // const scoreBoard = new Array();
+
+        // function game() {
+        //     for (let i = 0; i < 5; i++) {
+        //         let playerSelection = prompt('Rock, Paper, or Scissors?');
+        //         scoreBoard.push(playRound(playerSelection, getComputerChoice()));
+        //         console.log(scoreBoard[i]);
+        //     }  
+        //     return scoreTotal();
+        // }
+
+        // function scoreTotal() {
+        //     let score = 0;
+        //     for (let n = 0; n < 5; n++) {
+        //         if (scoreBoard[n].includes('Winner') == true) {
+        //             score++;
+        //         } else if (scoreBoard[n].includes('lose') == true) {
+        //             score--;
+        //         } else {
+        //             score + 0;
+        //         }
+        //     }
+
+        //     if (score > 0) {
+        //         return finalResult = 'Congratulations! You won a free iPod Nano!';
+        //     } else if (score < 0) {
+        //         return finalResult = 'You just lost the game!';
+        //     } else {
+        //         return finalResult = 'Sawadi-ka! It was a thai!'
+        //     }
+        // }
+        
+        // console.log(game());        
     </script>
 </body>
 </html>
