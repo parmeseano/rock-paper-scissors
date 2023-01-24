@@ -12,17 +12,10 @@
     <button class ="button" id="paper">Paper</button>
     <button class="button" id="scissors">Scissors</button>
 
+    <div id="results"></div>
+
     <script>
-
-        const rock = document.getElementById('rock').addEventListener('click', buttonClick);
-        const paper = document.getElementById('paper').addEventListener('click', buttonClick);
-        const scissors = document.getElementById('scissors').addEventListener('click', buttonClick);
-
-        function buttonClick() {
-            playerSelection = this.id;
-            console.log(playRound(playerSelection, getComputerChoice()));
-        }
-
+     
         function getComputerChoice() {
             const choiceArray = ['rock', 'paper', 'scissors'];
             let computerChoice = choiceArray[Math.floor(Math.random()*choiceArray.length)];
@@ -50,42 +43,57 @@
                 return result = 'Oopsies, something went wrong';
             }
         }
-
         
+        function scoreTotal() {
+            let score = 0;
+            for (let n = 0; n < 5; n++) {
+                if (scoreBoard[n].includes('Winner') == true) {
+                    score++;
+                } else if (scoreBoard[n].includes('lose') == true) {
+                    score--;
+                } else {
+                    score + 0;
+                }
+            }
 
-        // const scoreBoard = new Array();
+            if (score > 0) {
+                return finalResult = 'Congratulations! You won a free iPod Nano!';
+            } else if (score < 0) {
+                return finalResult = 'You just lost the game!';
+            } else {
+                return finalResult = 'Sawadi-ka! It was a thai!'
+            }   
+        }
+      
+        const rock = document.getElementById('rock').addEventListener('click', buttonClick);
+        const paper = document.getElementById('paper').addEventListener('click', buttonClick);
+        const scissors = document.getElementById('scissors').addEventListener('click', buttonClick);
 
-        // function game() {
-        //     for (let i = 0; i < 5; i++) {
-        //         let playerSelection = prompt('Rock, Paper, or Scissors?');
-        //         scoreBoard.push(playRound(playerSelection, getComputerChoice()));
-        //         console.log(scoreBoard[i]);
-        //     }  
-        //     return scoreTotal();
-        // }
+        const results = document.getElementById('results');
 
-        // function scoreTotal() {
-        //     let score = 0;
-        //     for (let n = 0; n < 5; n++) {
-        //         if (scoreBoard[n].includes('Winner') == true) {
-        //             score++;
-        //         } else if (scoreBoard[n].includes('lose') == true) {
-        //             score--;
-        //         } else {
-        //             score + 0;
-        //         }
-        //     }
+        const scoreBoard = new Array();
 
-        //     if (score > 0) {
-        //         return finalResult = 'Congratulations! You won a free iPod Nano!';
-        //     } else if (score < 0) {
-        //         return finalResult = 'You just lost the game!';
-        //     } else {
-        //         return finalResult = 'Sawadi-ka! It was a thai!'
-        //     }
-        // }
-        
-        // console.log(game());        
+        function buttonClick() {
+            playerSelection = this.id;
+            console.log(playRound(playerSelection, getComputerChoice()));
+            scoreBoard.push(playRound(playerSelection, getComputerChoice()));
+            document.getElementById('results').innerText += `\n ${result}`;
+            
+            if (scoreBoard.length === 5) {   
+                document.getElementById('results').innerHTML += `<div style = color:red> ${scoreTotal()} </div>`;
+                document.getElementById('results').innerHTML += `<br><button id="play">Play again?</button>`;
+                const playAgain = document.getElementById('play').addEventListener('click', restart);
+                document.getElementById('rock').disabled = true;
+                document.getElementById('paper').disabled = true;
+                document.getElementById('scissors').disabled = true;
+            } 
+           
+        }
+
+        function restart() {
+            location.reload();
+        }
+
     </script>
 </body>
 </html>
